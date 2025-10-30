@@ -194,15 +194,15 @@ describe("/playlists router", () => {
       const response = await request(app)
         .post(`/playlists/${playlist.id}/tracks`)
         .send({
-          trackId: 1,
+          tracks_id: 1,
         });
       expect(response.status).toBe(201);
       expect(response.body).toEqual(
         expect.objectContaining({
           id: expect.any(Number),
-          playlist_id: playlist.id,
-          track_id: 1,
-        }),
+          playlists_id: playlist.id,
+          tracks_id: 1,
+        })
       );
     });
 
@@ -216,8 +216,8 @@ describe("/playlists router", () => {
       ).body;
 
       const url = `/playlists/${playlist.id}/tracks`;
-      await request(app).post(url).send({ trackId: 1 });
-      const response = await request(app).post(url).send({ trackId: 1 });
+      await request(app).post(url).send({ tracks_id: 2 });
+      const response = await request(app).post(url).send({ tracks_id: 2 });
       expect(response.status).toBe(400);
     });
   });
